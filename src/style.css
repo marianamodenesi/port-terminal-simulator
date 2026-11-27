@@ -1,0 +1,126 @@
+/* Colours: ship classes are purple / orange / blue. Red is reserved for
+   warnings (laytime exceeded, demurrage), so no ship class uses it. */
+:root {
+  --bg: #0f1b2a;
+  --panel: #16263a;
+  --panel-2: #1d3149;
+  --line: #2b4562;
+  --fg: #e8eef5;
+  --muted: #9fb0c3;
+  --water: #123a5c;
+  --water-deep: #0d2c47;
+  --quay: #6b7785;
+  --chinamax: #8e5bd6;
+  --capesize: #f08a24;
+  --panamax: #2f7fd6;
+  --good: #3fb37f;
+  --bad: #e5484d;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+}
+h1 { font-size: 1.15rem; margin: 0; }
+h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 8px; }
+button {
+  background: var(--panel-2); color: var(--fg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 10px; font: inherit; cursor: pointer;
+}
+button[aria-pressed="true"] { border-color: var(--fg); }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: grid; grid-template-columns: auto 1fr auto auto; gap: 16px; align-items: center;
+  padding: 12px 16px; background: var(--panel); border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; gap: 10px; align-items: baseline; }
+.level { color: var(--muted); }
+.clock-time { font-variant-numeric: tabular-nums; font-weight: 600; }
+.clock-bar { height: 4px; background: var(--line); border-radius: 2px; margin-top: 4px; }
+#clock-progress { height: 100%; width: 0; background: var(--fg); border-radius: 2px; }
+.controls { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.demo { color: var(--muted); font-size: .85rem; margin-left: 6px; }
+.score { text-align: right; }
+.score-label { color: var(--muted); font-size: .75rem; }
+.score-value { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.score-value.bad { color: var(--bad); }
+.score-value.good { color: var(--good); }
+
+/* ---------- Line-up ---------- */
+.lineup { padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.lineup-track { position: relative; height: 72px; background: var(--panel); border-radius: 6px; overflow: hidden; }
+.lineup-tick { position: absolute; top: 0; bottom: 0; padding-top: 54px; border-left: 1px dashed var(--line); color: var(--muted); font-size: 10px; padding-left: 3px; }
+.lineup-ship {
+  position: absolute; height: 20px; padding: 0 6px; border-radius: 4px;
+  font-size: 11px; line-height: 20px; white-space: nowrap; color: #fff;
+}
+
+/* ---------- Main port area ---------- */
+.port { display: grid; grid-template-columns: 260px 1fr 220px; gap: 16px; padding: 16px; }
+.anchorage, .stats { background: var(--panel); border-radius: 8px; padding: 12px; }
+.count { background: var(--panel-2); border-radius: 999px; padding: 1px 8px; color: var(--fg); }
+.cards { display: flex; flex-direction: column; gap: 8px; max-height: 70vh; overflow-y: auto; }
+
+/* Ship card: everything the player needs to decide (decision support). */
+.card { background: var(--panel-2); border-radius: 6px; padding: 8px 10px; border-left: 5px solid; }
+.card.chinamax { border-color: var(--chinamax); }
+.card.capesize { border-color: var(--capesize); }
+.card.panamax  { border-color: var(--panamax); }
+.card-head { display: flex; justify-content: space-between; font-weight: 600; }
+.card-sub { color: var(--muted); font-size: .8rem; margin: 2px 0 6px; }
+.laytime { height: 5px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.laytime > div { height: 100%; background: var(--good); }
+.laytime.over > div { background: var(--bad); }
+.card-cost { font-size: .8rem; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.card-cost.bad { color: var(--bad); }
+.est { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 6px; font-size: .75rem; }
+.est span { background: var(--panel); border-radius: 4px; padding: 2px 4px; text-align: center; }
+.est span.no { color: var(--muted); opacity: .5; }
+
+/* Berths: quay on top, water below. Ships drawn to real length scale. */
+.berth { background: var(--panel); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+.berth-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.berth-name { font-weight: 600; }
+.badges { display: flex; gap: 4px; }
+.badge { width: 12px; height: 12px; border-radius: 3px; }
+.badge.chinamax, .chip.chinamax { background: var(--chinamax); }
+.badge.capesize, .chip.capesize { background: var(--capesize); }
+.badge.panamax,  .chip.panamax  { background: var(--panamax); }
+.quay { height: 8px; background: var(--quay); border-radius: 2px 2px 0 0; }
+.water { position: relative; height: 54px; background: linear-gradient(var(--water), var(--water-deep)); border-radius: 0 0 4px 4px; }
+.berth-info { display: flex; justify-content: space-between; color: var(--muted); font-size: .8rem; margin-top: 6px; }
+.queued { color: var(--muted); font-size: .8rem; }
+
+/* A ship at berth. The hull sinks as it loads: the dark band at the bottom
+   (the part under water) grows with the loading progress. */
+.ship {
+  position: absolute; left: 8px; top: 6px; height: 36px; border-radius: 4px 18px 18px 4px;
+  overflow: hidden; color: #fff; font-size: 12px; font-weight: 600; padding-left: 8px;
+  display: flex; align-items: center; transition: top .3s linear;
+}
+.ship.chinamax { background: var(--chinamax); }
+.ship.capesize { background: var(--capesize); }
+.ship.panamax  { background: var(--panamax); }
+.ship .draft { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(5, 20, 35, .55); }
+.ship .label { position: relative; z-index: 1; text-shadow: 0 1px 2px rgba(0,0,0,.5); }
+
+.stats dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; margin: 0 0 16px; }
+.stats dt { color: var(--muted); }
+.stats dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { color: #fff; border-radius: 4px; padding: 2px 6px; font-size: .75rem; }
+
+/* ---------- Phone layout ---------- */
+@media (max-width: 900px) {
+  .topbar { grid-template-columns: 1fr auto; }
+  .clock { grid-column: 1 / -1; order: 3; }
+  .controls { grid-column: 1 / -1; order: 4; }
+  .port { grid-template-columns: 1fr; padding: 12px; }
+  .cards { max-height: none; }
+  .lineup-ship .full { display: none; } /* phones: just the ship number */
+}
