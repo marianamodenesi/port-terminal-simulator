@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Port Terminal Simulator</title>
+  <style>
+    :root { --bg: #0f1b2a; --fg: #e8eef5; --muted: #9fb0c3; --chinamax: #8e5bd6; --capesize: #f08a24; --panamax: #2f7fd6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--fg);
+           font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 16px; }
+    main { max-width: 640px; text-align: center; }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 .5rem; }
+    p { color: var(--muted); line-height: 1.5; }
+    .ships { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 2rem 0; }
+    .ship { height: 18px; border-radius: 3px 10px 10px 3px; color: #fff; font-size: 12px; line-height: 18px; }
+    /* Lengths drawn to real scale: Chinamax ~360 m, Capesize ~290 m, Panamax ~229 m */
+    .chinamax { width: 360px; max-width: 90vw; background: var(--chinamax); }
+    .capesize { width: 290px; max-width: 72vw; background: var(--capesize); }
+    .panamax  { width: 229px; max-width: 57vw; background: var(--panamax); }
+    .tag { display: inline-block; margin-top: 1rem; padding: 4px 10px; border: 1px solid var(--muted); border-radius: 999px; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Port Terminal Simulator</h1>
+    <p>Run the berths of an iron ore export terminal for 30 days. Decide which ship goes where, keep demurrage low, and try to beat the algorithm.</p>
+    <div class="ships" aria-hidden="true">
+      <div class="ship chinamax">Chinamax</div>
+      <div class="ship capesize">Capesize</div>
+      <div class="ship panamax">Panamax</div>
+    </div>
+    <span class="tag">Level 1 in development</span>
+  </main>
+</body>
+</html>
