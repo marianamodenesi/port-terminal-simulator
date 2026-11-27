@@ -115,6 +115,27 @@ button[aria-pressed="true"] { border-color: var(--fg); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { color: #fff; border-radius: 4px; padding: 2px 6px; font-size: .75rem; }
 
+/* ---------- Player actions ---------- */
+.hint { padding: 10px 16px; background: #1b3a2e; border-bottom: 1px solid var(--line); font-size: .95rem; }
+.card, .lineup-ship { cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.card.booked, .lineup-ship.booked { cursor: default; }
+.lineup-ship.booked { outline: 2px dashed rgba(255,255,255,.7); }
+.card.selected, .lineup-ship.selected { outline: 3px solid #fff; outline-offset: 2px; }
+.est .wide { grid-column: 1 / -1; }
+.est .any { grid-column: 1 / -1; padding: 4px; font-size: .75rem; }
+.berth { cursor: pointer; transition: opacity .15s, box-shadow .15s; }
+.berth.ok { box-shadow: 0 0 0 2px var(--good); }
+.berth.ok.hover { box-shadow: 0 0 0 4px var(--good); background: #1c3a33; }
+.berth.locked { opacity: .45; }
+.preview { position: absolute; right: 10px; bottom: 6px; font-size: .8rem; font-weight: 600;
+  background: rgba(0,0,0,.45); padding: 2px 8px; border-radius: 4px; }
+.ghost { position: fixed; z-index: 10; pointer-events: none; transform: translate(-50%, -120%);
+  color: #fff; font-weight: 600; padding: 6px 12px; border-radius: 4px 14px 14px 4px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.4); }
+.ghost.chinamax { background: var(--chinamax); }
+.ghost.capesize { background: var(--capesize); }
+.ghost.panamax  { background: var(--panamax); }
+
 /* ---------- Phone layout ---------- */
 @media (max-width: 900px) {
   .topbar { grid-template-columns: 1fr auto; }
